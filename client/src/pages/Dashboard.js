@@ -39,7 +39,8 @@ import {
   CloudUpload as CloudUploadIcon,
   InfoOutlined as InfoOutlinedIcon,
   CheckCircle as CheckCircleIcon,
-  PictureAsPdf as PictureAsPdfIcon
+  PictureAsPdf as PictureAsPdfIcon,
+  Search as SearchIcon
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -371,6 +372,31 @@ const Dashboard = () => {
           </Grid>
 
           {/* Job Matches Carousel */}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<SearchIcon />}
+              onClick={() => navigate('/matches')}
+              sx={{
+                fontWeight: 700,
+                borderRadius: 3,
+                boxShadow: '0 2px 8px rgba(102,126,234,0.10)',
+                textTransform: 'none',
+                px: 2.5,
+                py: 1.2,
+                fontSize: '1rem',
+                transition: 'all 0.2s',
+                '&:hover': {
+                  bgcolor: 'primary.dark',
+                  boxShadow: '0 4px 16px rgba(102,126,234,0.18)',
+                  transform: 'translateY(-2px) scale(1.03)'
+                },
+              }}
+            >
+              View Job Matches
+            </Button>
+          </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
               Top Job Matches

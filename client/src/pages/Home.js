@@ -649,7 +649,7 @@ const Home = () => {
       <Box 
         sx={{ 
           py: 12,
-          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f5d0fe 100%)',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -1026,7 +1026,16 @@ const Home = () => {
       </Box>
 
       {/* CTA Section */}
-      <Box sx={{ py: 12, bgcolor: 'grey.50' }}>
+      <Box 
+        sx={{
+          py: 12,
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f5d0fe 100%)',
+          minHeight: '60vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <Container maxWidth="md">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

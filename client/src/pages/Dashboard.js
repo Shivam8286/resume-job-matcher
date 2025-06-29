@@ -371,6 +371,44 @@ const Dashboard = () => {
             ))}
           </Grid>
 
+          {/* Chat-like Prompt for Job Matches */}
+          <Box sx={{
+            mb: 5,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <Box
+              sx={{
+                p: 3,
+                borderRadius: 4,
+                background: 'rgba(255,255,255,0.8)',
+                boxShadow: '0 4px 24px #a084ee22',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                maxWidth: 480,
+                width: '100%',
+              }}
+            >
+              <Avatar sx={{ bgcolor: 'primary.main', width: 44, height: 44, fontSize: 28 }}>🤖</Avatar>
+              <Box sx={{ flex: 1 }}>
+                <Typography variant="body1" sx={{ fontWeight: 600, mb: 0.5 }}>
+                  I found roles perfect for your resume. Want to take a look?
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  sx={{ mt: 1, fontWeight: 700, borderRadius: 2, textTransform: 'none', px: 2.5 }}
+                  onClick={() => navigate('/matches')}
+                >
+                  Yes, show me
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+
           {/* Job Matches Carousel */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
             <Button

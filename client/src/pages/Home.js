@@ -591,8 +591,28 @@ const Home = () => {
       </Box>
 
       {/* Testimonials Section */}
-      <Box sx={{ py: 12 }}>
-        <Container maxWidth="lg">
+      <Box 
+        sx={{ 
+          py: 12,
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        {/* Background Pattern */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 0%, transparent 50%)',
+            zIndex: 1
+          }}
+        />
+        
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -646,7 +666,9 @@ const Home = () => {
                     color: 'white',
                     borderRadius: 3,
                     maxWidth: 600,
-                    mx: 'auto'
+                    mx: 'auto',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
                   }}
                 >
                   <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>

@@ -31,7 +31,11 @@ import {
   LinkedIn as LinkedInIcon,
   GitHub as GitHubIcon,
   Twitter as TwitterIcon,
-  KeyboardArrowDown as ArrowDownIcon
+  KeyboardArrowDown as ArrowDownIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  Business as BusinessIcon,
+  Verified as VerifiedIcon
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -41,6 +45,7 @@ const Home = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, -200]);
 
@@ -95,26 +100,65 @@ const Home = () => {
       name: 'Sarah Johnson',
       role: 'Senior Developer',
       company: 'TechCorp',
+      companyLogo: 'https://picsum.photos/80/40?random=101',
       avatar: 'https://i.pravatar.cc/150?img=1',
-      content: 'Found my dream job within 2 weeks! The AI matching was incredibly accurate.',
-      rating: 5
+      content: 'Found my dream job within 2 weeks! The AI matching was incredibly accurate and saved me hours of manual job searching.',
+      rating: 5,
+      jobFoundIn: '14 days',
+      salaryIncrease: '30%',
+      verified: true
     },
     {
       name: 'Michael Chen',
       role: 'Product Manager',
       company: 'StartupXYZ',
+      companyLogo: 'https://picsum.photos/80/40?random=102',
       avatar: 'https://i.pravatar.cc/150?img=2',
-      content: 'The daily job recommendations are spot-on. Saved me hours of job hunting.',
-      rating: 5
+      content: 'The daily job recommendations are spot-on. Saved me hours of job hunting and helped me find the perfect role.',
+      rating: 5,
+      jobFoundIn: '21 days',
+      salaryIncrease: '25%',
+      verified: true
     },
     {
       name: 'Emily Rodriguez',
       role: 'Data Scientist',
       company: 'DataFlow Inc',
+      companyLogo: 'https://picsum.photos/80/40?random=103',
       avatar: 'https://i.pravatar.cc/150?img=3',
-      content: 'Amazing platform! The resume parsing and job matching exceeded my expectations.',
-      rating: 5
+      content: 'Amazing platform! The resume parsing and job matching exceeded my expectations. Highly recommend!',
+      rating: 5,
+      jobFoundIn: '18 days',
+      salaryIncrease: '35%',
+      verified: true
+    },
+    {
+      name: 'David Kim',
+      role: 'UX Designer',
+      company: 'DesignHub',
+      companyLogo: 'https://picsum.photos/80/40?random=104',
+      avatar: 'https://i.pravatar.cc/150?img=4',
+      content: 'The platform helped me transition from freelance to full-time. The job matching algorithm is incredibly smart.',
+      rating: 5,
+      jobFoundIn: '25 days',
+      salaryIncrease: '40%',
+      verified: true
     }
+  ];
+
+  const companyLogos = [
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/google.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoft.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apple.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/amazon.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/meta.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/netflix.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/reddit.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/slack.svg',
+    'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg'
   ];
 
   const jobCategories = [
@@ -123,11 +167,22 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    let interval;
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      }, 5000);
+    }
     return () => clearInterval(interval);
-  }, []);
+  }, [isAutoPlaying, testimonials.length]);
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   const scrollToFeatures = () => {
     document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
@@ -613,13 +668,14 @@ const Home = () => {
         />
         
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+          {/* Social Proof Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Box textAlign="center" sx={{ mb: 8 }}>
+            <Box textAlign="center" sx={{ mb: 6 }}>
               <Chip
                 label="💬 Testimonials"
                 sx={{
@@ -636,17 +692,160 @@ const Home = () => {
               >
                 What Our Users Say
               </Typography>
+              
+              {/* Trust Badge and Rating */}
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, mb: 4 }}>
+                <Chip
+                  label="Trusted by 500+ Companies"
+                  sx={{
+                    bgcolor: 'rgba(102, 126, 234, 0.1)',
+                    color: '#667eea',
+                    fontWeight: 600,
+                    border: '1px solid rgba(102, 126, 234, 0.3)'
+                  }}
+                />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#667eea' }}>
+                    4.8
+                  </Typography>
+                  <Box sx={{ display: 'flex', gap: 0.5 }}>
+                    {[...Array(5)].map((_, i) => (
+                      <StarIcon key={i} sx={{ color: '#FFD700', fontSize: 20 }} />
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ color: 'text.secondary', ml: 1 }}>
+                    / 5.0
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Company Logos Grid */}
+              <Box sx={{ mb: 6 }}>
+                <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary', fontWeight: 500 }}>
+                  Trusted by leading companies worldwide
+                </Typography>
+                <Grid container spacing={3} justifyContent="center" alignItems="center">
+                  {companyLogos.map((logo, index) => (
+                    <Grid item key={index}>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Box
+                          component="img"
+                          src={logo}
+                          alt={`Company ${index + 1}`}
+                          sx={{
+                            height: 40,
+                            width: 120,
+                            opacity: 0.7,
+                            filter: 'grayscale(100%)',
+                            transition: 'all 0.3s ease',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            borderRadius: 1,
+                            border: '1px solid rgba(102, 126, 234, 0.2)',
+                            '&:hover': {
+                              opacity: 1,
+                              filter: 'grayscale(0%)'
+                            }
+                          }}
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                        <Box
+                          sx={{
+                            display: 'none',
+                            height: 40,
+                            width: 120,
+                            bgcolor: 'rgba(102, 126, 234, 0.1)',
+                            border: '1px solid rgba(102, 126, 234, 0.3)',
+                            borderRadius: 1,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#667eea',
+                            fontWeight: 600,
+                            fontSize: '0.8rem'
+                          }}
+                        >
+                          Company {index + 1}
+                        </Box>
+                      </motion.div>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
             </Box>
           </motion.div>
 
-          <Box sx={{ position: 'relative', minHeight: 300 }}>
+          {/* Testimonials Carousel */}
+          <Box 
+            sx={{ 
+              position: 'relative', 
+              minHeight: 400,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            {/* Navigation Buttons */}
+            <IconButton
+              onClick={prevTestimonial}
+              sx={{
+                position: 'absolute',
+                left: { xs: 10, md: -60 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                bgcolor: 'rgba(255, 255, 255, 0.9)',
+                border: '1px solid rgba(102, 126, 234, 0.2)',
+                color: '#667eea',
+                zIndex: 10,
+                '&:hover': {
+                  bgcolor: 'rgba(102, 126, 234, 0.1)',
+                  transform: 'translateY(-50%) scale(1.1)'
+                },
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <ChevronLeftIcon />
+            </IconButton>
+
+            <IconButton
+              onClick={nextTestimonial}
+              sx={{
+                position: 'absolute',
+                right: { xs: 10, md: -60 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                bgcolor: 'rgba(255, 255, 255, 0.9)',
+                border: '1px solid rgba(102, 126, 234, 0.2)',
+                color: '#667eea',
+                zIndex: 10,
+                '&:hover': {
+                  bgcolor: 'rgba(102, 126, 234, 0.1)',
+                  transform: 'translateY(-50%) scale(1.1)'
+                },
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <ChevronRightIcon />
+            </IconButton>
+
+            {/* Testimonial Cards */}
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{
                   opacity: currentTestimonial === index ? 1 : 0,
-                  x: currentTestimonial === index ? 0 : 50
+                  x: currentTestimonial === index ? 0 : 50,
+                  scale: currentTestimonial === index ? 1 : 0.95
                 }}
                 transition={{ duration: 0.5 }}
                 style={{
@@ -665,58 +864,163 @@ const Home = () => {
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: 'white',
                     borderRadius: 3,
-                    maxWidth: 600,
+                    maxWidth: 700,
                     mx: 'auto',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    position: 'relative'
                   }}
                 >
+                  {/* Quote Icons */}
+                  <Typography 
+                    variant="h1" 
+                    sx={{ 
+                      position: 'absolute',
+                      top: 20,
+                      left: 30,
+                      fontSize: '3rem',
+                      opacity: 0.3,
+                      color: 'white'
+                    }}
+                  >
+                    ❝
+                  </Typography>
+                  <Typography 
+                    variant="h1" 
+                    sx={{ 
+                      position: 'absolute',
+                      bottom: 20,
+                      right: 30,
+                      fontSize: '3rem',
+                      opacity: 0.3,
+                      color: 'white'
+                    }}
+                  >
+                    ❞
+                  </Typography>
+
+                  {/* Success Metrics */}
+                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mb: 3 }}>
+                    <Chip
+                      label={`Found job in ${testimonial.jobFoundIn}`}
+                      sx={{
+                        bgcolor: 'rgba(255, 255, 255, 0.2)',
+                        color: 'white',
+                        fontWeight: 600
+                      }}
+                    />
+                    <Chip
+                      label={`${testimonial.salaryIncrease} salary increase`}
+                      sx={{
+                        bgcolor: 'rgba(255, 255, 255, 0.2)',
+                        color: 'white',
+                        fontWeight: 600
+                      }}
+                    />
+                  </Box>
+
+                  {/* Rating Stars */}
                   <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <StarIcon key={i} sx={{ color: '#FFD700', fontSize: 24 }} />
                     ))}
                   </Box>
+
+                  {/* Testimonial Content */}
                   <Typography
                     variant="h6"
-                    sx={{ mb: 3, fontStyle: 'italic', lineHeight: 1.6 }}
+                    sx={{ mb: 4, fontStyle: 'italic', lineHeight: 1.6, px: 2 }}
                   >
                     "{testimonial.content}"
                   </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+
+                  {/* User Info */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
                     <Avatar
                       src={testimonial.avatar}
-                      sx={{ width: 60, height: 60 }}
+                      sx={{ width: 70, height: 70, border: '3px solid rgba(255, 255, 255, 0.3)' }}
                     />
-                    <Box>
-                      <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                        {testimonial.name}
-                      </Typography>
-                      <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                    <Box sx={{ textAlign: 'left' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                          {testimonial.name}
+                        </Typography>
+                        {testimonial.verified && (
+                          <VerifiedIcon sx={{ color: '#4CAF50', fontSize: 20 }} />
+                        )}
+                      </Box>
+                      <Typography variant="body2" sx={{ opacity: 0.8, mb: 1 }}>
                         {testimonial.role} at {testimonial.company}
+                      </Typography>
+                      <Box
+                        component="img"
+                        src={testimonial.companyLogo}
+                        alt={testimonial.company}
+                        sx={{ 
+                          height: 25, 
+                          width: 80,
+                          opacity: 0.8,
+                          borderRadius: 0.5,
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)'
+                        }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'block';
+                        }}
+                      />
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          display: 'none',
+                          color: 'rgba(255, 255, 255, 0.8)',
+                          fontWeight: 600,
+                          fontSize: '0.7rem'
+                        }}
+                      >
+                        {testimonial.company}
                       </Typography>
                     </Box>
                   </Box>
                 </Paper>
               </motion.div>
             ))}
+          </Box>
 
-            {/* Testimonial Navigation */}
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, gap: 1 }}>
+          {/* Progress Bar */}
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               {testimonials.map((_, index) => (
                 <Box
                   key={index}
                   onClick={() => setCurrentTestimonial(index)}
                   sx={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: '50%',
+                    width: currentTestimonial === index ? 40 : 12,
+                    height: 8,
+                    borderRadius: 4,
                     bgcolor: currentTestimonial === index ? 'primary.main' : 'grey.300',
                     cursor: 'pointer',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      bgcolor: currentTestimonial === index ? 'primary.dark' : 'grey.400'
+                    }
                   }}
                 />
               ))}
             </Box>
+          </Box>
+
+          {/* Auto-play Indicator */}
+          <Box sx={{ textAlign: 'center', mt: 2 }}>
+            <Chip
+              label={isAutoPlaying ? "Auto-playing" : "Paused"}
+              size="small"
+              sx={{
+                bgcolor: isAutoPlaying ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 152, 0, 0.1)',
+                color: isAutoPlaying ? '#4CAF50' : '#FF9800',
+                fontWeight: 500
+              }}
+            />
           </Box>
         </Container>
       </Box>

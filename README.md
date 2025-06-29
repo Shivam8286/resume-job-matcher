@@ -25,7 +25,7 @@ An AI-powered platform that matches resumes with job opportunities using advance
 - **Advanced Email**: $15/month for 50K emails
 - **Database**: MongoDB Atlas ($9/month)
 
-## ⏱️ Timeline
+## ⏱️ Timeline for development
 
 - **Week 1**: Backend setup, resume parsing, basic job matching
 - **Week 2**: Frontend development, user interface
@@ -140,11 +140,6 @@ Your MongoDB will contain these collections:
    - Paid service
    - Wide range of US jobs
 
-### LinkedIn Jobs:
-❌ **LinkedIn doesn't provide a public job search API**
-- No official API available
-- Terms of service prohibit scraping
-- Enterprise partnerships only (very expensive)
 
 ## 🚀 Deployment
 

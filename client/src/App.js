@@ -5,7 +5,7 @@ import { CssBaseline, Box } from '@mui/material';
 import { Toaster } from 'react-hot-toast';
 
 // Components
-import Navbar from './components/Navbar';
+import NavbarEnhanced from './components/NavbarEnhanced';
 import Home from './pages/Home';
 import ResumeUpload from './pages/ResumeUpload';
 import JobMatches from './pages/JobMatches';
@@ -66,7 +66,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-            <Navbar />
+            <NavbarEnhanced />
             <Box component="main" sx={{ pt: 8 }}>
               <Routes>
                 <Route path="/" element={<Home />} />

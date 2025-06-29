@@ -770,61 +770,415 @@ const Home = () => {
       </Box>
 
       {/* Footer */}
-      <Box sx={{ py: 6, bgcolor: 'grey.900', color: 'white' }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
-                Job Matcher
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 3, opacity: 0.8 }}>
-                AI-powered job matching platform helping professionals find their dream careers.
-              </Typography>
-              <Stack direction="row" spacing={2}>
-                <IconButton sx={{ color: 'white' }}>
-                  <LinkedInIcon />
-                </IconButton>
-                <IconButton sx={{ color: 'white' }}>
-                  <GitHubIcon />
-                </IconButton>
-                <IconButton sx={{ color: 'white' }}>
-                  <TwitterIcon />
-                </IconButton>
-              </Stack>
+      <Box 
+        sx={{ 
+          background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a1929 100%)',
+          color: 'white',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        {/* Animated Gradient Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
+            animation: 'gradientShift 8s ease-in-out infinite',
+            zIndex: 1,
+            '@keyframes gradientShift': {
+              '0%, 100%': {
+                opacity: 0.8,
+                transform: 'scale(1) rotate(0deg)'
+              },
+              '50%': {
+                opacity: 1,
+                transform: 'scale(1.05) rotate(1deg)'
+              }
+            }
+          }}
+        />
+        
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+          {/* Main Footer Content */}
+          <Box sx={{ py: 8 }}>
+            <Grid container spacing={4}>
+              {/* Company Info Card */}
+              <Grid item xs={12} md={4}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                >
+                  <Box
+                    sx={{
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: 4,
+                      p: 4,
+                      height: '100%',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
+                        borderRadius: 4,
+                        zIndex: -1
+                      }
+                    }}
+                  >
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                      <WorkIcon sx={{ 
+                        fontSize: 36, 
+                        color: '#667eea', 
+                        mr: 2,
+                        filter: 'drop-shadow(0 2px 8px rgba(102, 126, 234, 0.3))'
+                      }} />
+                      <Typography 
+                        variant="h4" 
+                        sx={{ 
+                          fontWeight: 900,
+                          fontFamily: '"Poppins", sans-serif',
+                          background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                          backgroundClip: 'text',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
+                        }}
+                      >
+                        Job Matcher
+                      </Typography>
+                    </Box>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        mb: 4, 
+                        opacity: 0.9, 
+                        lineHeight: 1.8, 
+                        fontSize: '1.1rem',
+                        fontFamily: '"Inter", sans-serif',
+                        fontWeight: 400
+                      }}
+                    >
+                      AI-powered job matching platform that revolutionizes how professionals discover and connect with their dream careers.
+                    </Typography>
+                  </Box>
+                </motion.div>
+              </Grid>
+
+              {/* Connect with Us */}
+              <Grid item xs={12} md={4}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#667eea' }}>
+                    Connect with Us
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 3, opacity: 0.8, lineHeight: 1.6 }}>
+                    Stay connected and get the latest updates on job opportunities and platform features.
+                  </Typography>
+                  
+                  {/* Social Media */}
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="body2" sx={{ mb: 2, fontWeight: 500, color: '#667eea' }}>
+                      Follow Us
+                    </Typography>
+                    <Stack direction="row" spacing={2}>
+                      <IconButton 
+                        sx={{ 
+                          bgcolor: 'rgba(102, 126, 234, 0.1)',
+                          border: '1px solid rgba(102, 126, 234, 0.3)',
+                          color: '#667eea',
+                          '&:hover': {
+                            bgcolor: 'rgba(102, 126, 234, 0.2)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+                          },
+                          transition: 'all 0.3s ease'
+                        }}
+                      >
+                        <LinkedInIcon />
+                      </IconButton>
+                      <IconButton 
+                        sx={{ 
+                          bgcolor: 'rgba(102, 126, 234, 0.1)',
+                          border: '1px solid rgba(102, 126, 234, 0.3)',
+                          color: '#667eea',
+                          '&:hover': {
+                            bgcolor: 'rgba(102, 126, 234, 0.2)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+                          },
+                          transition: 'all 0.3s ease'
+                        }}
+                      >
+                        <GitHubIcon />
+                      </IconButton>
+                      <IconButton 
+                        sx={{ 
+                          bgcolor: 'rgba(102, 126, 234, 0.1)',
+                          border: '1px solid rgba(102, 126, 234, 0.3)',
+                          color: '#667eea',
+                          '&:hover': {
+                            bgcolor: 'rgba(102, 126, 234, 0.2)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+                          },
+                          transition: 'all 0.3s ease'
+                        }}
+                      >
+                        <TwitterIcon />
+                      </IconButton>
+                    </Stack>
+                  </Box>
+
+                  {/* Contact Info */}
+                  <Box>
+                    <Typography variant="body2" sx={{ mb: 2, fontWeight: 500, color: '#667eea' }}>
+                      Contact Info
+                    </Typography>
+                    <Typography variant="body2" sx={{ opacity: 0.8, mb: 1 }}>
+                      📧 hello@jobmatcher.com
+                    </Typography>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      📞 +1 (555) 123-4567
+                    </Typography>
+                  </Box>
+                </motion.div>
+              </Grid>
+
+              {/* Support & Legal Card */}
+              <Grid item xs={12} md={4}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  <Box
+                    sx={{
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: 4,
+                      p: 4,
+                      height: '100%',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <Typography 
+                      variant="h6" 
+                      sx={{ 
+                        mb: 3, 
+                        fontWeight: 700,
+                        fontFamily: '"DM Sans", sans-serif',
+                        color: '#667eea',
+                        textAlign: 'center'
+                      }}
+                    >
+                      Support & Legal
+                    </Typography>
+                    <Stack spacing={2}>
+                      <Button
+                        color="inherit"
+                        sx={{ 
+                          justifyContent: 'center', 
+                          textTransform: 'none',
+                          opacity: 0.8,
+                          fontFamily: '"Inter", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '1rem',
+                          position: 'relative',
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            bottom: 0,
+                            left: '50%',
+                            width: 0,
+                            height: '2px',
+                            background: '#667eea',
+                            transition: 'all 0.3s ease',
+                            transform: 'translateX(-50%)'
+                          },
+                          '&:hover': {
+                            opacity: 1,
+                            color: '#667eea',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                              width: '80%'
+                            }
+                          },
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                      >
+                        Help Center
+                      </Button>
+                      <Button
+                        color="inherit"
+                        sx={{ 
+                          justifyContent: 'center', 
+                          textTransform: 'none',
+                          opacity: 0.8,
+                          fontFamily: '"Inter", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '1rem',
+                          position: 'relative',
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            bottom: 0,
+                            left: '50%',
+                            width: 0,
+                            height: '2px',
+                            background: '#667eea',
+                            transition: 'all 0.3s ease',
+                            transform: 'translateX(-50%)'
+                          },
+                          '&:hover': {
+                            opacity: 1,
+                            color: '#667eea',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                              width: '80%'
+                            }
+                          },
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                      >
+                        Privacy Policy
+                      </Button>
+                      <Button
+                        color="inherit"
+                        sx={{ 
+                          justifyContent: 'center', 
+                          textTransform: 'none',
+                          opacity: 0.8,
+                          fontFamily: '"Inter", sans-serif',
+                          fontWeight: 500,
+                          fontSize: '1rem',
+                          position: 'relative',
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            bottom: 0,
+                            left: '50%',
+                            width: 0,
+                            height: '2px',
+                            background: '#667eea',
+                            transition: 'all 0.3s ease',
+                            transform: 'translateX(-50%)'
+                          },
+                          '&:hover': {
+                            opacity: 1,
+                            color: '#667eea',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                              width: '80%'
+                            }
+                          },
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                      >
+                        Terms of Service
+                      </Button>
+                    </Stack>
+                  </Box>
+                </motion.div>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Quick Links
-              </Typography>
-              <Stack spacing={1}>
-                <Button
-                  color="inherit"
-                  onClick={() => navigate('/upload')}
-                  sx={{ justifyContent: 'flex-start', textTransform: 'none' }}
+          </Box>
+
+          {/* Bottom Section */}
+          <Box sx={{ 
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            pt: 4,
+            pb: 3
+          }}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} md={6}>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    opacity: 0.7,
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 400
+                  }}
                 >
-                  Upload Resume
-                </Button>
-                <Button
-                  color="inherit"
-                  onClick={() => navigate('/register')}
-                  sx={{ justifyContent: 'flex-start', textTransform: 'none' }}
-                >
-                  Sign Up
-                </Button>
-                <Button
-                  color="inherit"
-                  onClick={() => navigate('/login')}
-                  sx={{ justifyContent: 'flex-start', textTransform: 'none' }}
-                >
-                  Login
-                </Button>
-              </Stack>
+                  © 2024 Job Matcher. All rights reserved. | Made with ❤️ for job seekers worldwide
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Stack direction="row" spacing={3} justifyContent={{ xs: 'flex-start', md: 'flex-end' }}>
+                  <Button
+                    size="small"
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.6)',
+                      textTransform: 'none',
+                      fontFamily: '"Inter", sans-serif',
+                      fontWeight: 500,
+                      '&:hover': { 
+                        color: '#667eea',
+                        transform: 'translateY(-1px)',
+                        transition: 'all 0.3s ease'
+                      },
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    Terms
+                  </Button>
+                  <Button
+                    size="small"
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.6)',
+                      textTransform: 'none',
+                      fontFamily: '"Inter", sans-serif',
+                      fontWeight: 500,
+                      '&:hover': { 
+                        color: '#667eea',
+                        transform: 'translateY(-1px)',
+                        transition: 'all 0.3s ease'
+                      },
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    Privacy
+                  </Button>
+                  <Button
+                    size="small"
+                    sx={{ 
+                      color: 'rgba(255, 255, 255, 0.6)',
+                      textTransform: 'none',
+                      fontFamily: '"Inter", sans-serif',
+                      fontWeight: 500,
+                      '&:hover': { 
+                        color: '#667eea',
+                        transform: 'translateY(-1px)',
+                        transition: 'all 0.3s ease'
+                      },
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    Cookies
+                  </Button>
+                </Stack>
+              </Grid>
             </Grid>
-          </Grid>
-          <Divider sx={{ my: 4, borderColor: 'rgba(255,255,255,0.1)' }} />
-          <Typography variant="body2" sx={{ textAlign: 'center', opacity: 0.6 }}>
-            © 2024 Job Matcher. All rights reserved.
-          </Typography>
+          </Box>
         </Container>
       </Box>
     </Box>

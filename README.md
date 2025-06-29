@@ -10,6 +10,18 @@ An AI-powered platform that matches resumes with job opportunities using advance
 - **Daily Job Recommendations**: Automated email notifications with personalized job matches
 - **Modern UI**: Beautiful React frontend with responsive design
 - **User Dashboard**: Track applications and manage preferences
+- **Interactive Dashboard**: Glassmorphism, animated stats, job matches carousel, notifications, and upload card with progress and preview
+
+## ✨ Latest UI/UX Improvements
+
+- **Modern Dashboard**: Glassmorphism effect, gradient borders, and soft shadows for a premium look
+- **Animated Stats Cards**: Animated numbers, icons, and hover effects for applications, matches, and more
+- **Job Matches Carousel**: Horizontally scrollable, interactive job cards with company logos and Apply buttons
+- **Recent Activity Timeline**: Vertical timeline with icons, color highlights, and clear timestamps
+- **Notification Bell**: Dropdown with latest notifications and badge for unread items
+- **Upload Resume Card**: Progress meter, animated icon, PDF preview, tooltips, and smart color cues
+- **Navigation Buttons**: Prominent "View Job Matches" and "Upload Resume" buttons for easy access
+- **Responsive & Accessible**: All features work beautifully on desktop and mobile
 
 ## 💰 Cost Breakdown
 
